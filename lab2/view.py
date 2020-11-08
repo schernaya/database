@@ -48,7 +48,7 @@ class View(object):
                      '\t(9) Add phone to form\n'
                      '\t(10) Update quantity of phones in form\n'
                      '\t(11) Delete forms phone\n'
-                     '\t(12) Generate forms phones\n' 
+                     '\t(12) Generate forms phones\n'
                      '\t(0) Go back\n')
 
     @staticmethod
@@ -144,7 +144,7 @@ class View(object):
 
     @staticmethod
     def get_value(value):
-        return input('\nEnter a ' + value + ': ')
+        return input('Enter a ' + value + ': ')
 
     @staticmethod
     def get_search_date(value):
@@ -158,7 +158,7 @@ class View(object):
     def get_search(value):
         return input('Enter a search ' + value + ': ')
 
-    # delete oparations
+    # delete operations
 
     @staticmethod
     def display_customer_deletion(customer):
@@ -215,6 +215,10 @@ class View(object):
         print('The data was successfully inserted!')
 
     # errors
+
+    @staticmethod
+    def display_menu_error():
+        print('\nNot a number!')
 
     @staticmethod
     def no_such_option():

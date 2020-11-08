@@ -244,7 +244,9 @@ def random_customers(conn, num):
           "when 2 then 'Ruslan Anatolich' " \
           "when 3 then 'Andrii Vasylovych' " \
           "when 4 then 'Nataliya Antonivna' " \
-          "when 5 then 'Sophie' " \
+          "when 5 then 'Sophie Chorna' " \
+          "when 6 then 'Irina Mikhailovna' " \
+          "when 7 then 'Victoria Igorevna' " \
           "end) as name, " \
           "'user_' || seq || '@' || " \
           "(case (random() * 3)::int " \
@@ -263,7 +265,7 @@ def random_forms(conn, num):
           "select " \
           "(case (random() * 7)::int " \
           "when 0 then 'PayPal' " \
-          "when 1 then 'Tatiana Nikolaevna' " \
+          "when 1 then 'EasyPay' " \
           "when 2 then 'WebMoney' " \
           "when 3 then 'Privat24' " \
           "when 4 then 'Bitcoin Cash' " \
@@ -271,7 +273,7 @@ def random_forms(conn, num):
           "when 6 then 'Visa' " \
           "when 7 then 'QIWI' " \
           "end) as payment_method," \
-          "((current_date - floor(random()* (365-0+ 1) + 0)*('1 day')::interval)::date) as ship_date," \
+          "((current_date - floor(random()* (365-0+ 1) + 0)*('1 day')::interval)::date)," \
           "fk_customer_id() " \
           "from GENERATE_SERIES(1, {}) ".format(num)
     conn.execute(sql)
@@ -304,7 +306,8 @@ def random_form_phone(conn, num):
 
 
 def search_customers(conn, name, email, date_from, date_to):
-    sql = "SELECT DISTINCT customer.id, name, email FROM customer INNER JOIN form ON form.customer_id = customer.id " \
+    sql = "SELECT DISTINCT customer.id, name, email FROM customer " \
+          "INNER JOIN form ON form.customer_id = customer.id " \
           "WHERE (name LIKE '%{}%') AND (email LIKE '%{}%') " \
           "AND (ship_date >= '{}') AND (ship_date <= '{}')" \
           "ORDER BY customer.id ASC". \
@@ -323,8 +326,8 @@ def search_forms(conn, payment_method, quantity, company):
           "INNER JOIN phone ON phone.id = form_phone.phone_id " \
           "WHERE (payment_method LIKE '%{}%') AND (quantity = '{}') " \
           "AND (company LIKE '%{}%') " \
-          "ORDER BY form.id".format(
-        payment_method, quantity, company)
+          "ORDER BY form.id".\
+        format(payment_method, quantity, company)
     conn.execute(sql)
     results = conn.fetchall()
     if conn.rowcount == 0:
@@ -338,8 +341,8 @@ def search_phones(conn, price_from, price_to, quantity):
           "INNER JOIN form_phone ON phone.id = form_phone.phone_id " \
           "WHERE (price >= '{}') AND (price <= '{}') " \
           "AND (quantity = '{}') " \
-          "ORDER BY phone.id".format(
-        price_from, price_to, quantity)
+          "ORDER BY phone.id".\
+        format(price_from, price_to, quantity)
     conn.execute(sql)
     results = conn.fetchall()
     if conn.rowcount == 0:

@@ -21,130 +21,127 @@ class Controller(object):
         os.system('clear')
         while in_menu:
             option_entity = self.view.display_menu()
-            while option_entity <= '0' or option_entity >= '4' or len(option_entity) == '0':
-                option_entity = self.view.display_menu()
+            if option_entity.isdigit():
 
-            if option_entity == '1':
-                in_customer_menu = True
+                if option_entity == '1':
+                    in_customer_menu = True
 
-                while in_customer_menu:
-                    customer_option = self.view.display_customer_menu()
+                    while in_customer_menu:
+                        customer_option = self.view.display_customer_menu()
 
-                    if customer_option == '1':
-                        self.show_customers()
+                        if customer_option == '1':
+                            self.show_customers()
 
-                    elif customer_option == '2':
-                        self.show_customer_option()
+                        elif customer_option == '2':
+                            self.show_customer_option()
 
-                    elif customer_option == '3':
-                        self.update_customer_option()
+                        elif customer_option == '3':
+                            self.update_customer_option()
 
-                    elif customer_option == '4':
-                        self.create_customer_option()
+                        elif customer_option == '4':
+                            self.create_customer_option()
 
-                    elif customer_option == '5':
-                        self.delete_customer_option()
+                        elif customer_option == '5':
+                            self.delete_customer_option()
 
-                    elif customer_option == '6':
-                        self.random_customer_option()
+                        elif customer_option == '6':
+                            self.random_customer_option()
 
-                    elif customer_option == '7':
-                        self.search_customer_option()
+                        elif customer_option == '7':
+                            self.search_customer_option()
 
-                    elif customer_option == '0':
-                        in_customer_menu = False
-                        continue
-                    else:
-                        self.view.no_such_option()
-                        continue
+                        elif customer_option == '0':
+                            in_customer_menu = False
+                        else:
+                            self.view.no_such_option()
 
-            elif option_entity == '2':
-                in_form_menu = True
+                elif option_entity == '2':
+                    in_form_menu = True
 
-                while in_form_menu:
-                    form_option = self.view.display_form_menu()
-                    if form_option == '1':
-                        self.show_forms()
+                    while in_form_menu:
+                        form_option = self.view.display_form_menu()
+                        if form_option == '1':
+                            self.show_forms()
 
-                    elif form_option == '2':
-                        self.show_form_option()
+                        elif form_option == '2':
+                            self.show_form_option()
 
-                    elif form_option == '3':
-                        self.update_form_option()
+                        elif form_option == '3':
+                            self.update_form_option()
 
-                    elif form_option == '4':
-                        self.create_form_option()
+                        elif form_option == '4':
+                            self.create_form_option()
 
-                    elif form_option == '5':
-                        self.delete_form_option()
+                        elif form_option == '5':
+                            self.delete_form_option()
 
-                    elif form_option == '6':
-                        self.random_form_option()
+                        elif form_option == '6':
+                            self.random_form_option()
 
-                    elif form_option == '7':
-                        self.search_form_option()
+                        elif form_option == '7':
+                            self.search_form_option()
 
-                    elif form_option == '8':
-                        self.show_forms_phone_option()
+                        elif form_option == '8':
+                            self.show_forms_phone_option()
 
-                    elif form_option == '9':
-                        self.create_form_phone_option()
+                        elif form_option == '9':
+                            self.create_form_phone_option()
 
-                    elif form_option == '10':
-                        self.update_form_phone_option()
+                        elif form_option == '10':
+                            self.update_form_phone_option()
 
-                    elif form_option == '11':
-                        self.delete_form_phone_option()
+                        elif form_option == '11':
+                            self.delete_form_phone_option()
 
-                    elif form_option == '12':
-                        self.random_form_phone_option()
+                        elif form_option == '12':
+                            self.random_form_phone_option()
 
-                    elif form_option == '0':
-                        in_form_menu = False
-                        continue
-                    else:
-                        self.view.no_such_option()
-                        continue
+                        elif form_option == '0':
+                            in_form_menu = False
+                            continue
+                        else:
+                            self.view.no_such_option()
+                            continue
 
-            elif option_entity == '3':
-                in_phone_menu = True
+                elif option_entity == '3':
+                    in_phone_menu = True
 
-                while in_phone_menu:
-                    phone_option = self.view.display_phone_menu()
-                    if phone_option == '1':
-                        self.show_phones()
+                    while in_phone_menu:
+                        phone_option = self.view.display_phone_menu()
+                        if phone_option == '1':
+                            self.show_phones()
 
-                    elif phone_option == '2':
-                        self.show_phone_option()
+                        elif phone_option == '2':
+                            self.show_phone_option()
 
-                    elif phone_option == '3':
-                        self.update_phone_option()
+                        elif phone_option == '3':
+                            self.update_phone_option()
 
-                    elif phone_option == '4':
-                        self.create_phone_option()
+                        elif phone_option == '4':
+                            self.create_phone_option()
 
-                    elif phone_option == '5':
-                        self.delete_phone_option()
+                        elif phone_option == '5':
+                            self.delete_phone_option()
 
-                    elif phone_option == '6':
-                        self.random_phones_option()
+                        elif phone_option == '6':
+                            self.random_phones_option()
 
-                    elif phone_option == '7':
-                        self.search_phones_option()
+                        elif phone_option == '7':
+                            self.search_phones_option()
 
-                    elif phone_option == '0':
-                        in_phone_menu = False
-                        continue
-                    else:
-                        self.view.no_such_option()
-                        continue
+                        elif phone_option == '0':
+                            in_phone_menu = False
+                            continue
+                        else:
+                            self.view.no_such_option()
+                            continue
 
-            elif option_entity == '0':
-                in_menu = False
-                continue
+                elif option_entity == '0':
+                    break
+                else:
+                    self.view.no_such_option()
             else:
-                self.view.no_such_option()
-                continue
+                self.view.display_menu_error()
 
     # update operations
 
@@ -339,21 +336,30 @@ class Controller(object):
 
     def search_customers(self, name, email, date_from, date_to):
         try:
+            start_time = time.time()
             res = self.model.search_customers(name, email, date_from, date_to)
+            end_time = time.time()
+            self.view.display_query_time(end_time - start_time)
             self.view.show_customers(res)
         except Exception as e:
             self.view.display_exception(e)
 
     def search_forms(self, payment_method, quantity, company):
         try:
+            start_time = time.time()
             res = self.model.search_forms(payment_method, quantity, company)
+            end_time = time.time()
+            self.view.display_query_time(end_time - start_time)
             self.view.show_forms(res)
         except Exception as e:
             self.view.display_exception(e)
 
     def search_phones(self, price_from, price_to, quantity):
         try:
+            start_time = time.time()
             res = self.model.search_phones(price_from, price_to, quantity)
+            end_time = time.time()
+            self.view.display_query_time(end_time - start_time)
             self.view.show_phones(res)
         except Exception as e:
             self.view.display_exception(e)
