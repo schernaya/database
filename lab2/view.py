@@ -229,6 +229,10 @@ class View(object):
         print(err)
 
     @staticmethod
+    def display_fk_customer_exception():
+        print('Error! There is no such customer id!')
+
+    @staticmethod
     def display_generate_error(err):
         print('Error! The generated data was not inserted!\n {}'.format(err.args[0]))
 
@@ -242,11 +246,15 @@ class View(object):
 
     @staticmethod
     def display_email_error():
-        return print('\nIt is not email. Try again: ')
+        return print('It is not email. Try again: ')
 
     @staticmethod
     def display_date_error():
-        return print('\nIt is not date. Try again: ')
+        return print('It is not date. Try again: ')
+
+    @staticmethod
+    def display_price_error():
+        return print('It is not price.')
 
     # exceptions
 

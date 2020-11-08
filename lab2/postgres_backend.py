@@ -165,7 +165,7 @@ def update_phone(conn, phone):
 
 def update_form_phone(conn, form_id, phone_id, quantity):
     sql = "UPDATE form_phone SET quantity = '{}' " \
-          "WHERE  form_id = '{}' AND" \
+          "WHERE  form_id = '{}' AND " \
           "phone_id = '{}' " \
           "RETURNING *".format(phone_id, quantity, form_id)
     conn.execute(sql)

@@ -187,7 +187,7 @@ class Controller(object):
             res = self.model.create_form(row)
             self.view.show_form(res)
         except Exception as e:
-            self.view.display_exception(e)
+            self.view.display_fk_customer_exception()
 
     def create_phone(self, row):
         try:
@@ -288,7 +288,7 @@ class Controller(object):
                 ship_date = datetime.date(year, month, day)
                 return ship_date
             except ValueError:
-                self.view.display_number_error()
+                self.view.display_date_error()
 
     # random
 
@@ -384,11 +384,14 @@ class Controller(object):
             if option_update == '1':
                 value = self.view.get_value('name')
                 while len(value) == 0:
+                    self.view.display_empty_error()
                     value = self.view.get_value('name')
                 customer.name = value
+
             elif option_update == '2':
                 value = self.view.get_value('email')
                 while len(value) == 0:
+                    self.view.display_empty_error()
                     value = self.view.get_value('email')
                 customer.email = value
 
@@ -458,14 +461,17 @@ class Controller(object):
             if option_update == '1':
                 value = self.view.get_value('payment method')
                 while len(value) == 0:
+                    self.view.display_empty_error()
                     self.view.get_value('payment method')
                 form.payment_method = value
+
             elif option_update == '2':
                 value = self.get_date()
                 form.ship_date = value
             elif option_update == '3':
                 value = self.view.get_value('customer id')
                 while not value.isnumeric():
+                    self.view.display_number_error()
                     value = self.view.get_value('customer id')
                 form.customer_id = value
             self.update_form(form)
@@ -475,12 +481,14 @@ class Controller(object):
     def create_form_option(self):
         pay_method = self.view.get_value('payment method')
         while len(pay_method) == 0:
+            self.view.display_empty_error()
             pay_method = self.view.get_value('payment method')
 
         ship_date = self.get_date()
-        customer_id = self.view.get_item_id()
+        customer_id = self.view.get_value('customer id')
         while len(customer_id) == 0 or not customer_id.isnumeric():
-            customer_id = self.view.get_item_id()
+            self.view.display_empty_error()
+            customer_id = self.view.get_value('customer id')
         row = ['', pay_method, ship_date, customer_id]
         self.create_form(row)
 
@@ -499,14 +507,17 @@ class Controller(object):
     def search_form_option(self):
         pay_method = self.view.get_value('payment method')
         while len(pay_method) == 0:
+            self.view.display_empty_error()
             pay_method = self.view.get_value('payment method')
 
         quantity = self.view.get_value('quantity')
         while not quantity.isnumeric():
+            self.view.display_number_error()
             quantity = self.view.get_value('quantity')
 
         company = self.view.get_value('company')
         while len(company) == 0:
+            self.view.display_empty_error()
             company = self.view.get_value('company')
 
         self.search_forms(pay_method, quantity, company)
@@ -535,32 +546,38 @@ class Controller(object):
     def update_form_phone_option(self):
         form_id = self.view.get_value('form id')
         while not form_id.isnumeric():
+            self.view.display_number_error()
             form_id = self.view.get_value('form id')
 
         phone_id = self.view.get_value('phone id')
         while not phone_id.isnumeric():
+            self.view.display_number_error()
             phone_id = self.view.get_value('phone id')
 
         quantity = self.view.get_value('quantity')
         while not quantity.isnumeric():
+            self.view.display_number_error()
             quantity = self.view.get_value('quantity')
 
         self.update_form_phone(form_id, phone_id, quantity)
 
     def delete_form_phone_option(self):
         form_id = self.view.get_value('form id')
-        while not form_id.isnumeric():
+        while not form_id.isdigit():
+            self.view.display_number_error()
             form_id = self.view.get_value('form id')
 
         phone_id = self.view.get_value('phone id')
-        while not phone_id.isnumeric():
+        while not phone_id.isdigit():
+            self.view.display_number_error()
             phone_id = self.view.get_value('phone id')
 
         self.delete_form_phone(form_id, phone_id)
 
     def random_form_phone_option(self):
         num = self.view.get_number_of_random()
-        while not num.isnumeric:
+        while not num.isdigit():
+            self.view.display_number_error()
             num = self.view.get_number_of_random()
 
         self.random_form_phone(num)
@@ -570,12 +587,14 @@ class Controller(object):
     def show_phone_option(self):
         id = self.view.get_item_id()
         while not id.isnumeric():
+            self.view.display_number_error()
             id = self.view.get_item_id()
         self.show_phone(id)
 
     def update_phone_option(self):
         item_id = self.view.get_item_id()
         while not item_id.isnumeric():
+            self.view.display_number_error()
             item_id = self.view.get_item_id()
 
         phone = self.model.read_phone(item_id)
@@ -585,16 +604,21 @@ class Controller(object):
             if option_update == '1':
                 value = self.view.get_value('model')
                 while len(value) == 0:
+                    self.view.display_empty_error()
                     value = self.view.get_value('model')
                 phone.model = value
+
             elif option_update == '2':
                 value = self.view.get_value('company')
                 while len(value) == 0:
+                    self.view.display_empty_error()
                     value = self.view.get_value('company')
                 phone.model = value
+
             elif option_update == '3':
                 value = self.view.get_value('price')
                 while not value.isnumeric():
+                    self.view.display_price_error()
                     value = self.view.get_value('price')
                 phone.price = value
             self.update_phone(phone)
@@ -604,10 +628,12 @@ class Controller(object):
     def create_phone_option(self):
         model = self.view.get_value('model')
         while len(model) == 0:
+            self.view.display_empty_error()
             model = self.view.get_value('model')
 
         company = self.view.get_value('company')
         while len(company) == 0:
+            self.view.display_empty_error()
             company = self.view.get_value('company')
 
         price = self.view.get_value('price')
@@ -619,26 +645,31 @@ class Controller(object):
     def delete_phone_option(self):
         item_id = self.view.get_item_id()
         while not item_id.isnumeric():
+            self.view.display_number_error()
             item_id = self.view.get_item_id()
         self.delete_phone(item_id)
 
     def random_phones_option(self):
         num = self.view.get_number_of_random()
         while not num.isnumeric:
+            self.view.display_number_error()
             num = self.view.get_number_of_random()
         self.random_phones(num)
 
     def search_phones_option(self):
         price_from = self.view.get_value('price from')
         while not price_from.isnumeric():
+            self.view.display_price_error()
             price_from = self.view.get_value('price from')
 
         price_to = self.view.get_value('price to')
         while not price_to.isnumeric():
+            self.view.display_price_error()
             price_to = self.view.get_value('price to')
 
         quantity = self.view.get_value('quantity')
         while not quantity.isnumeric():
+            self.view.display_number_error()
             quantity = self.view.get_value('quantity')
 
         self.search_phones(price_from, price_to, quantity)
