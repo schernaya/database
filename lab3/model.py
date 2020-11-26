@@ -32,9 +32,6 @@ class Model(object):
     def read_phone(self, id):
         return self.session.query(Phone).get(id)
 
-    # def read_customers(self, pagination_filter):
-    #     return self.session.query(Customer).offset(pagination_filter.offset).limit(pagination_filter.page_size)
-
     def read_customers(self):
         return self.session.query(Customer).all()
 
